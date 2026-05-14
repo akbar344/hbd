@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HBD Cantik ❤️</title>
+
+<title>Happy Birthday ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -11,13 +15,13 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
     overflow:hidden;
     height:100vh;
-    background:black;
+    background:#050510;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -25,122 +29,183 @@ body{
 
 /* BACKGROUND */
 
-.blur{
+.bg{
     position:absolute;
-    width:350px;
-    height:350px;
-    border-radius:50%;
-    filter:blur(120px);
-    animation:move 8s infinite alternate;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at top left,#ff00ff33,transparent 30%),
+    radial-gradient(circle at bottom right,#00ffff33,transparent 30%);
 }
 
-.blur1{
-    background:#ff00ff;
-    left:-100px;
-    top:-100px;
-}
-
-.blur2{
-    background:#00ffff;
-    right:-100px;
-    bottom:-100px;
-}
-
-@keyframes move{
-    from{
-        transform:translateY(-20px);
-    }
-    to{
-        transform:translateY(20px);
-    }
-}
-
-/* PARTICLES */
+/* STARS */
 
 canvas{
     position:absolute;
-    top:0;
-    left:0;
+    inset:0;
 }
 
 /* CARD */
 
 .card{
     position:relative;
-    width:350px;
-    padding:25px;
+    width:360px;
+    padding:20px;
     border-radius:30px;
+    overflow:hidden;
+
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,0.2);
-    text-align:center;
-    overflow:hidden;
-    box-shadow:0 0 40px rgba(255,255,255,0.1);
 
-}.slider{
+    border:1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 0 40px rgba(255,0,255,0.2),
+    0 0 80px rgba(0,255,255,0.1);
+
+    animation:floating 5s ease-in-out infinite;
+}
+
+@keyframes floating{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+/* PROGRESS */
+
+.progress{
+    position:absolute;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    background:linear-gradient(90deg,#ff00ff,#00ffff);
+    animation:loading 4s linear infinite;
+    z-index:10;
+}
+
+@keyframes loading{
+    from{
+        width:0%;
+    }
+    to{
+        width:100%;
+    }
+}
+
+/* SLIDER */
+
+.slider{
     position:relative;
-    width:85%;
-    height:400px;
+    width:100%;
+    height:420px;
     overflow:hidden;
-    border-radius:20px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:black;
+    border-radius:25px;
 }
 
 .slide{
     position:absolute;
-
-    max-width:100%;
-    max-height:100%;
-
-    width:auto;
-    height:auto;
-
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-
-    object-fit:contain;
+    width:100%;
+    height:100%;
+    object-fit:cover;
     opacity:0;
     transition:1s;
+    transform:scale(1);
 }
 
 .slide.active{
     opacity:1;
+    animation:zoom 4s linear;
+}
+
+@keyframes zoom{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.08);
+    }
+}
+
+/* OVERLAY */
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+    transparent,
+    rgba(0,0,0,0.6)
+    );
+}
+
+/* TEXT */
+
+.content{
+    position:absolute;
+    bottom:25px;
+    left:20px;
+    right:20px;
+    color:white;
+    z-index:5;
 }
 
 h1{
-    margin-top:20px;
-    color:white;
-    font-size:35px;
+    font-size:32px;
+    font-weight:700;
+
     text-shadow:
-        0 0 10px #ff00ff,
-        0 0 20px #00ffff;
+    0 0 10px #ff00ff,
+    0 0 20px #00ffff;
 }
 
 #message{
-    margin-top:15px;
-    color:white;
-    font-size:18px;
-    min-height:50px;
-    transition:0.5s;
+    margin-top:10px;
+    font-size:16px;
+    min-height:45px;
+    color:#eee;
 }
 
-/* HEART */
+/* HEARTS */
 
 .heart{
     position:absolute;
     color:red;
     animation:fall linear forwards;
+    pointer-events:none;
 }
 
 @keyframes fall{
     to{
         transform:translateY(110vh);
+        opacity:0;
     }
+}
+
+/* MUSIC BUTTON */
+
+.music-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+
+    width:45px;
+    height:45px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.15);
+    color:white;
+    font-size:18px;
+
+    backdrop-filter:blur(10px);
+
+    cursor:pointer;
+    z-index:20;
 }
 
 </style>
@@ -148,23 +213,30 @@ h1{
 
 <body>
 
-<div class="blur blur1"></div>
-<div class="blur blur2"></div>
+<div class="bg"></div>
 
 <canvas id="canvas"></canvas>
 
 <div class="card">
 
+<div class="progress"></div>
+
+<button class="music-btn" onclick="toggleMusic()">
+🎵
+</button>
+
 <div class="slider">
 
 <!-- GANTI FOTO -->
 <img class="slide active" src="cantik1.jpg">
-<img class="slide" src="cantik2.jpg">
+<img class="slide" src="cantik1.jpg">
 <img class="slide" src="cantik3.jpg">
 
-</div>
+<div class="overlay"></div>
 
-<h1>HBD CANTIK ❤️</h1>
+<div class="content">
+
+<h1>Happy Birthday DIVA❤️</h1>
 
 <p id="message">
 Semoga harimu selalu bahagia ✨
@@ -172,21 +244,62 @@ Semoga harimu selalu bahagia ✨
 
 </div>
 
+</div>
+
+</div>
+
+<!-- GANTI LAGU -->
+<audio id="music" loop>
+<source src="TULUS.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 
-/* SLIDE FOTO */
+/* SLIDE */
 
 const slides = document.querySelectorAll(".slide");
 
 const messages = [
+
 "Semoga harimu selalu bahagia ✨",
+
 "Panjang umur dan sehat selalu 🤍",
-"Jangan lupa senyum cantik terus 😆",
+
+"Jangan lupa senyum terus cantik 😆",
+
 "Semoga semua impianmu tercapai 🌸",
+
 "Stay cute and happy always ❤️"
+
 ];
 
 let index = 0;
+
+function typeText(text){
+
+    let i = 0;
+
+    const message = document.getElementById("message");
+
+    message.innerHTML = "";
+
+    function typing(){
+
+        if(i < text.length){
+
+            message.innerHTML += text.charAt(i);
+
+            i++;
+
+            setTimeout(typing,40);
+
+        }
+
+    }
+
+    typing();
+
+}
 
 function changeSlide(){
 
@@ -202,61 +315,104 @@ function changeSlide(){
 
     slides[index].classList.add("active");
 
-    document.getElementById("message")
-    .innerHTML = messages[index];
+    typeText(messages[index]);
 
 }
 
-setInterval(changeSlide,3000);
+setInterval(changeSlide,4000);
 
-/* PARTICLES */
+/* MUSIC */
+
+const music = document.getElementById("music");
+
+function toggleMusic(){
+
+    if(music.paused){
+
+        music.play();
+
+    }else{
+
+        music.pause();
+
+    }
+
+}
+
+/* STARS */
 
 const canvas = document.getElementById("canvas");
+
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
+
 canvas.height = window.innerHeight;
 
-let particles = [];
+let stars = [];
 
-class Particle{
+class Star{
+
     constructor(){
+
         this.x = Math.random()*canvas.width;
+
         this.y = Math.random()*canvas.height;
-        this.size = Math.random()*3;
-        this.speedY = Math.random()*1 + 0.5;
+
+        this.size = Math.random()*2;
+
+        this.speed = Math.random()*0.5 + 0.2;
+
     }
 
     update(){
-        this.y += this.speedY;
+
+        this.y += this.speed;
 
         if(this.y > canvas.height){
+
             this.y = 0;
+
+            this.x = Math.random()*canvas.width;
+
         }
+
     }
 
     draw(){
+
         ctx.fillStyle = "white";
+
         ctx.beginPath();
+
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+
         ctx.fill();
+
     }
+
 }
 
 for(let i=0;i<150;i++){
-    particles.push(new Particle());
+
+    stars.push(new Star());
+
 }
 
 function animate(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    particles.forEach(p=>{
-        p.update();
-        p.draw();
+    stars.forEach(star=>{
+
+        star.update();
+
+        star.draw();
+
     });
 
     requestAnimationFrame(animate);
+
 }
 
 animate();
@@ -274,7 +430,7 @@ function createHeart(){
     heart.style.left = Math.random()*100 + "vw";
 
     heart.style.fontSize =
-    Math.random()*20 + 20 + "px";
+    Math.random()*20 + 15 + "px";
 
     heart.style.animationDuration =
     Math.random()*3 + 2 + "s";
@@ -282,12 +438,40 @@ function createHeart(){
     document.body.appendChild(heart);
 
     setTimeout(()=>{
+
         heart.remove();
+
     },5000);
 
 }
 
-setInterval(createHeart,300);
+setInterval(createHeart,250);
+
+/* AUTO PLAY */
+
+window.addEventListener("load", () => {
+
+    const playMusic = () => {
+
+        music.play()
+        .then(()=>{
+
+            console.log("music play");
+
+        })
+        .catch(err=>{
+
+            console.log("autoplay blocked");
+
+        });
+
+    };
+
+    playMusic();
+
+    document.body.addEventListener("click", playMusic);
+
+});
 
 </script>
 
